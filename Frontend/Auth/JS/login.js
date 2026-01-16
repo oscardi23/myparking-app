@@ -30,7 +30,17 @@ function validatePassword() {
     const password = document.getElementById('password');
     const passwordConfirm = document.getElementById('password-confirm');
     
+    if (password) {
+        // Validar longitud (mínimo 8)
+        if (password.value.length < 8) {
+            password.setCustomValidity('La contraseña debe tener al menos 8 caracteres');
+        } else {
+            password.setCustomValidity('');
+        }
+    }
+    
     if (password && passwordConfirm) {
+        // Validar si coinciden
         if (password.value !== passwordConfirm.value) {
             passwordConfirm.setCustomValidity('Las contraseñas no coinciden');
         } else {
@@ -42,8 +52,11 @@ function validatePassword() {
 // Añadir el evento de validación si los campos existen
 const passInput = document.getElementById('password');
 const confirmInput = document.getElementById('password-confirm');
-if (passInput && confirmInput) {
-    passInput.addEventListener('change', validatePassword);
-    confirmInput.addEventListener('keyup', validatePassword);
+
+if (passInput) {
+    passInput.addEventListener('input', validatePassword);
+}
+if (confirmInput) {
+    confirmInput.addEventListener('input', validatePassword);
 }
 
